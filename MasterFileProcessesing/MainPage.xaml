@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MasterFileProcessing.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <!--  xmlns:local="clr-namespace:MasterFileProcessing.Models">  -->
+    <Grid Padding="25">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!--  Loading Window Overlay  -->
+        <Grid
+            x:Name="LoadingOverlay"
+            BackgroundColor="#80000000"
+            ColumnSpan="3"
+            HorizontalOptions="Fill"
+            IsVisible="{Binding IsLoading}"
+            RowSpan="2"
+            VerticalOptions="Fill"
+            ZIndex="10">
+            <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                <Image
+                    Grid.Row="0"
+                    Aspect="AspectFit"
+                    HeightRequest="185"
+                    Source="dotnet_bot.png" />
+                <ActivityIndicator
+                    HeightRequest="50"
+                    IsRunning="True"
+                    WidthRequest="50"
+                    Color="White" />
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Margin="0,0,10,0">
+                <Grid RowDefinitions="Auto,*">
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Grid.Column="0"
+                            Margin="0,0,2,0"
+                            Padding="5"
+                            BackgroundColor="#D3D3D3"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center"
+                            IsVisible="{Binding IsDuplicateEquipments}"
+                            Text="Owner Code" />
+                        <Label
+                            Grid.Column="1"
+                            Padding="5"
+                            BackgroundColor="#D3D3D3"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center"
+                            IsVisible="{Binding IsDuplicateEquipments}"
+                            Text="Count" />
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <CollectionView
+                            x:Name="OwnerCodeGrid"
+                            Grid.Column="0"
+                            Background="#BCF0F1"
+                            IsVisible="{Binding IsDuplicateEquipments}"
+                            ItemsSource="{Binding OwnerCodesDetails, Mode=TwoWay}">
+                            <!--<CollectionView.Header>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label
+                                    Grid.Column="0"
+                                    Padding="5"
+                                    BackgroundColor="#D3D3D3"
+                                    FontAttributes="Bold"
+                                    HorizontalTextAlignment="Center"
+                                    Text="Owner Code" />
+                                <Label
+                                    Grid.Column="1"
+                                    Padding="5"
+                                    BackgroundColor="#D3D3D3"
+                                    FontAttributes="Bold"
+                                    HorizontalTextAlignment="Center"
+                                    Text="Count" />
+                            </Grid>
+                        </CollectionView.Header>-->
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Entry
+                                            Grid.Column="0"
+                                            BackgroundColor="Transparent"
+                                            IsReadOnly="True"
+                                            Text="{Binding ownerCodes}"
+                                            TextColor="Black" />
+                                        <Entry
+                                            Grid.Column="1"
+                                            BackgroundColor="Transparent"
+                                            IsReadOnly="True"
+                                            Text="{Binding ownerCodeCount}"
+                                            TextColor="Black" />
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                            <!--<CollectionView.Footer>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0">
+                                    <Entry
+                                        BackgroundColor="Transparent"
+                                        FontAttributes="Bold"
+                                        HorizontalTextAlignment="End"
+                                        Text="Total Owner Code"
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
+                                </Grid>
+                                <Grid Grid.Column="1">
+                                    <Entry
+                                        BackgroundColor="Transparent"
+                                        IsReadOnly="True"
+                                        Text="{Binding OwnerCodeCount}"
+                                        TextColor="Black" />
+                                </Grid>
+                            </Grid>
+                        </CollectionView.Footer>-->
+                        </CollectionView>
+                    </Grid>
+                </Grid>
+                <!--  Footer for the grid itself  -->
+                <!--<Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        Grid.Column="0"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Bold"
+                        HorizontalTextAlignment="End"
+                        Text="Grid Footer"
+                        TextColor="Black"
+                        VerticalTextAlignment="End" />
+                    <Label
+                        Grid.Column="1"
+                        BackgroundColor="Transparent"
+                        HorizontalTextAlignment="Center"
+                        Text="hsfjskd"
+                        TextColor="Black"
+                        VerticalTextAlignment="End" />
+                </Grid>-->
+            </Grid>
+            <Grid Grid.Column="1" Margin="0,0,10,0">
+                <Grid RowDefinitions="Auto,*">
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Grid.Column="0"
+                            Margin="0,0,2,0"
+                            Padding="5"
+                            BackgroundColor="#D3D3D3"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center"
+                            IsVisible="{Binding IsDuplicateEquipments}"
+                            Text="Owner Code" />
+                        <Label
+                            Grid.Column="1"
+                            Padding="5"
+                            BackgroundColor="#D3D3D3"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center"
+                            IsVisible="{Binding IsDuplicateEquipments}"
+                            Text="Count" />
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <CollectionView
+                            x:Name="EmpCodeGrid"
+                            Grid.Column="0"
+                            Background="#E1FBD8"
+                            IsVisible="{Binding IsDuplicateEquipments}"
+                            ItemsSource="{Binding EmployeeCodesDetails, Mode=TwoWay}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Entry
+                                            Grid.Column="0"
+                                            BackgroundColor="Transparent"
+                                            IsReadOnly="True"
+                                            Text="{Binding EmpCodes}"
+                                            TextColor="Black" />
+                                        <Entry
+                                            Grid.Column="1"
+                                            BackgroundColor="Transparent"
+                                            IsReadOnly="True"
+                                            Text="{Binding EmpCodeCount}"
+                                            TextColor="Black" />
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                            <!--<CollectionView.Footer>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0">
+                                <Entry
+                                    BackgroundColor="Transparent"
+                                    FontAttributes="Bold"
+                                    HorizontalTextAlignment="End"
+                                    Text="Total Employee Code"
+                                    TextColor="Black"
+                                    VerticalTextAlignment="Center" />
+                            </Grid>
+
+                            <Grid Grid.Column="1">
+                                <Entry
+                                    BackgroundColor="Transparent"
+                                    IsReadOnly="True"
+                                    Text="{Binding BindingContext.EmpCodeCount, Mode=TwoWay, Source={x:Reference EmpCodeGrid}}"
+                                    TextColor="Black" />
+                            </Grid>
+                        </Grid>
+                    </CollectionView.Footer>-->
+                        </CollectionView>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid Grid.Column="2">
+                <Grid RowDefinitions="Auto,*">
+                    <Grid Grid.Row="0">
+                        <Label
+                            Padding="5"
+                            BackgroundColor="#D3D3D3"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center"
+                            IsVisible="{Binding IsDuplicateEquipments}"
+                            Text="Duplicate Equipments" />
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <CollectionView
+                            x:Name="DuplicateRecordGrid"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Background="#F9EFC7"
+                            IsVisible="{Binding IsDuplicateEquipments}"
+                            ItemsSource="{Binding DuplicateEquipments, Mode=TwoWay}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="x:String">
+                                    <Entry
+                                        BackgroundColor="Transparent"
+                                        IsReadOnly="True"
+                                        Text="{Binding}"
+                                        TextColor="Black" />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <CollectionView x:Name="FileListView" HeightRequest="200">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding}" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Button
+                Grid.Row="1"
+                Clicked="OnRefreshFileExplorerClicked"
+                Text="Select Master File" />
+        </Grid>
+    </Grid>
+</ContentPage>
